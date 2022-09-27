@@ -1,0 +1,11 @@
+.footer {
+    text-align: center;
+    color: white;
+    background: #130318;
+
+}
+
+.footer p {
+    position: relative;
+    z-index: 1000;
+}

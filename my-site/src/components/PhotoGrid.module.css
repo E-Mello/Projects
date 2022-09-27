@@ -1,0 +1,54 @@
+.section02 {
+    box-sizing: border-box;
+    text-align: center;
+    background: #1c0522;
+}
+
+.photoGridHeader {
+    color: white;
+}
+
+.photoGrid {
+    box-sizing: border-box;
+    display: inline-grid;
+    margin: 0 auto;
+    width: 90rem;
+    height: 50%;
+    padding: 0;
+}
+
+.photoGridList {
+    overflow-x: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.photoGridItem {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+.photoGridItem img, .photoGridItem video {
+    width: 40rem;
+    transform: scale(0.6);
+    transition: all ease 0.2s;
+    border: 3px solid white;
+    display: inline-block;
+}
+
+.photoGridItem img:hover, .photoGridItem video:hover {
+    transform: scale(1);
+}
+
+.section02::before {
+    content: '';
+    position: relative;
+    bottom: -51rem;
+    width: 100%;
+    height: 5.25rem;
+    background: linear-gradient(to top, #130318, transparent);
+    z-index: 1000;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+}

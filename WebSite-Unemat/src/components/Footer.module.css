@@ -1,0 +1,14 @@
+.footer {
+    background: var(--gray-800);
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem 0;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    bottom: 0;
+}
+
+.footer img {
+    height: 2rem;
+}
