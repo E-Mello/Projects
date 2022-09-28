@@ -2,11 +2,12 @@ import {
     Flex,
     Heading
 } from "@chakra-ui/react";
+import { FlexCenter } from "../components/FlexCenter";
 
 export function Reports() {
     return (
-        <Flex>
-            <Heading>Olá eu sou responsável pelos relatórios</Heading>
-        </Flex>
+        <>
+            <FlexCenter />
+        </>
     );
 }

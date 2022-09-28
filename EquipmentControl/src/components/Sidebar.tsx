@@ -58,6 +58,8 @@ export function Sidebar() {
                 w={navSize == "small" ? "4.6875rem" : "15.625rem"}
                 flexDir="column"
                 justifyContent="space-between"
+                transition={navSize == "small" ? "all 0.3s ease-in-out" : ""}
+                backgroundColor="#ebe9e9"
             >
 
                 <Flex
@@ -80,35 +82,30 @@ export function Sidebar() {
                                 changeNavSize("small")
                         }}
                     />
-                    <IconButton
-                        aria-label={''}
-                        background="red"
-                        transition="width 2s, height 4s"
-                        mt={5}
-                        _hover={{ background: 'none' }}
-                        icon={<FiMenu />}
-                        onClick={() => {
-                            if (navSize == "small")
-                                changeNavSize("large")
-                            else
-                                changeNavSize("small")
-                        }}
-
-                    />
-                    <Link href='/'>
+                    <Link href='/'
+                        _hover={{ textDecor: 'none' }}
+                    >
+                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    </Link>
+                    <Link href='/register-device'
+                        _hover={{ textDecor: 'none' }}
+                    >
                         <NavItem navSize={navSize} icon={BiEdit} title="Cadastrar Aparelhos"></NavItem>
                     </Link>
-                    <Link href='/register-device'>
-                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    <Link href='/device-control'
+                        _hover={{ textDecor: 'none' }}
+                    >
+                        <NavItem navSize={navSize} icon={BsJournalBookmarkFill} title="Controle de Aparelhos"></NavItem>
                     </Link>
-                    <Link href='/device-control'>
-                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    <Link href='/reports'
+                        _hover={{ textDecor: 'none' }}
+                    >
+                        <NavItem navSize={navSize} icon={TbReport} title="Relatórios"></NavItem>
                     </Link>
-                    <Link href='/reports'>
-                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
-                    </Link>
-                    <Link href='/settings'>
-                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    <Link href='/settings'
+                        _hover={{ textDecor: 'none' }}
+                    >
+                        <NavItem navSize={navSize} icon={MdOutlineBuild} title="Configuracoes"></NavItem>
                     </Link>
                 </Flex>
 

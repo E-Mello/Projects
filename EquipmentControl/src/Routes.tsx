@@ -2,7 +2,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { RegisterDevice } from './pages/RegisterDevice'
 import { Dashboard } from './pages/Dashboard'
-import { Layout } from './pages/Layout'
 import { DeviceControl } from './pages/DeviceControl'
 import { Reports } from './pages/Reports'
 import { Settings } from './pages/Settings'

@@ -2,11 +2,12 @@ import {
     Flex,
     Heading
 } from "@chakra-ui/react";
+import { FlexCenter } from "../components/FlexCenter";
 
 export function NoPage() {
     return (
-        <Flex>
-            <Heading>Olá eu sou uma pagina vazia</Heading>
-        </Flex>
+        <>
+            <FlexCenter />
+        </>
     );
 }
