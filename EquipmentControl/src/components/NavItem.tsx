@@ -18,8 +18,8 @@ interface NavItemProps {
     navSize: string;
     title: string;
     icon: IconType;
-    active: boolean;
-    description: string;
+    active?: boolean;
+    description?: string;
 }
 
 export function NavItem({ navSize, title, icon, active, description }: NavItemProps) {
@@ -32,13 +32,13 @@ export function NavItem({ navSize, title, icon, active, description }: NavItemPr
         >
             <Menu placement="right">
                 <Link
-                    background={active && "#AEC8CA"}
+                    background={active ? "#AEC8CA" : ""}
                     p={3}
                     borderRadius={8}
                     _hover={{ textDecor: 'none', backgroundColor: '#AEC8CA' }}
-                    w={navSize == "large" && "100"}
+                    w={navSize == "large" ? "100%" : " sm"}
                 >
-                    <MenuButton w={"100%"}>
+                    <MenuButton w="100%">
                         <Flex>
                             <Icon as={icon} fontSize="xl" color={active ? "#AEC8CA" : "gray.500"} />
                             <Text ml={5} display={navSize == "small" ? "none" : "flex"}>{title}</Text>

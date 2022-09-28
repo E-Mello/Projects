@@ -9,7 +9,8 @@ import {
     Fade,
     ScaleFade,
     Slide,
-    SlideFade
+    SlideFade,
+    Link
 } from "@chakra-ui/react";
 import {
     FiMenu,
@@ -42,20 +43,6 @@ import {
     MdSchool
 } from "react-icons/md";
 import { NavItem } from './NavItem'
-import {
-    BrowserRouter,
-    Route,
-    Routes,
-    Link
-} from 'react-router-dom';
-import { Dashboard } from '../pages/Dashboard';
-import { RegisterDevice } from '../pages/RegisterDevice';
-import { DeviceControl } from '../pages/DeviceControl';
-import { Settings } from '../pages/Settings';
-import { Reports } from '../pages/Reports';
-
-// import { Link as ReachLink } from "@reach/router"
-
 
 export function Sidebar() {
     const [navSize, changeNavSize] = useState("large")
@@ -93,22 +80,38 @@ export function Sidebar() {
                                 changeNavSize("small")
                         }}
                     />
-                    <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard">
-                        <Link to='/'></Link>
-                    </NavItem>
-                    <NavItem navSize={navSize} icon={BiEdit} title="Cadastrar Aparelhos">
-                        <Link to="/RegisterDevice"></Link>
-                    </NavItem>
-                    <NavItem navSize={navSize} icon={BsJournalBookmarkFill} title="Controle de Aparelhos">
-                        <Link to="/DeviceControl"></Link>
-                    </NavItem>
-                    <NavItem navSize={navSize} icon={TbReport} title="Reports">
-                        <Link to="/Reports"></Link>
-                    </NavItem>
-                    <NavItem navSize={navSize} icon={FiSettings} title="Settings">
-                        <Link to="/Settings"></Link>
-                    </NavItem>
+                    <IconButton
+                        aria-label={''}
+                        background="red"
+                        transition="width 2s, height 4s"
+                        mt={5}
+                        _hover={{ background: 'none' }}
+                        icon={<FiMenu />}
+                        onClick={() => {
+                            if (navSize == "small")
+                                changeNavSize("large")
+                            else
+                                changeNavSize("small")
+                        }}
+
+                    />
+                    <Link href='/'>
+                        <NavItem navSize={navSize} icon={BiEdit} title="Cadastrar Aparelhos"></NavItem>
+                    </Link>
+                    <Link href='/register-device'>
+                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    </Link>
+                    <Link href='/device-control'>
+                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    </Link>
+                    <Link href='/reports'>
+                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    </Link>
+                    <Link href='/settings'>
+                        <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                    </Link>
                 </Flex>
+
                 <Flex
                     p="5"
                     flexDir="column"

@@ -10,7 +10,7 @@ import { IconType } from "react-icons/lib";
 interface NavHoverBoxProps {
     icon: IconType;
     title: string;
-    description: string;
+    description?: string;
 }
 
 export function NavHoverBox({ icon, title, description }: NavHoverBoxProps) {
