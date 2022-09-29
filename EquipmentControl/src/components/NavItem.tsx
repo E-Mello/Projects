@@ -16,7 +16,6 @@ import {
 } from "react-icons/lib";
 import { NavHoverBox } from "./NavHoverBox";
 
-import { Link as ReachLink } from "@reach/router"
 import { useState } from "react";
 interface NavItemProps {
     navSize: string;
@@ -93,7 +92,7 @@ export function NavItem({ navSize, title, icon, active, description }: NavItemPr
                             <Text>{description}</Text>
                         </Flex>
                     </Flex>
-                    <NavHoverBox title={title} icon={icon} description={description}></NavHoverBox>
+                    {/* <NavHoverBox title={title} icon={icon} description={description}></NavHoverBox> */}
                 </MenuList>
             </Menu>
 

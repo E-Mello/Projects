@@ -15,11 +15,9 @@ import '../global.css'
 
 export function App() {
   return (
-    <>
-      <Flex>
-        <Sidebar />
-        <Routes />
-      </Flex>
-    </>
+    <Flex>
+      <Sidebar />
+      <Routes />
+    </Flex>
   )
 }

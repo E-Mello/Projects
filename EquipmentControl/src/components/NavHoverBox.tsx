@@ -19,7 +19,7 @@ export function NavHoverBox({ icon, title, description }: NavHoverBoxProps) {
     return (
         <>
             <Flex
-                visibility={flag ? 'visible' : 'hidden'}
+            // visibility={flag ? 'visible' : 'hidden'}
             >
                 <Flex
                     pos="absolute"

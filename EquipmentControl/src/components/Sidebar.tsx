@@ -102,11 +102,6 @@ export function Sidebar() {
                     >
                         <NavItem navSize={navSize} icon={TbReport} title="Relatórios"></NavItem>
                     </Link>
-                    <Link href='/settings'
-                        _hover={{ textDecor: 'none' }}
-                    >
-                        <NavItem navSize={navSize} icon={MdOutlineBuild} title="Configuracoes"></NavItem>
-                    </Link>
                 </Flex>
 
                 <Flex
