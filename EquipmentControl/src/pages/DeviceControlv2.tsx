@@ -93,19 +93,21 @@ export function DeviceControlv2() {
                             </FormControl>
                             <Flex
                                 marginLeft="10rem"
+                                display="inline-flex"
                             >
                                 <Stack
                                     direction='column'
                                     spacing={2}
                                     align='center'
-                                    display="inline-block"
+                                    display="flex"
                                 >
-                                    <Flex display="inline-">
+                                    <Flex display="inline">
                                         <Button
                                             colorScheme='blackAlpha'
                                             variant='outline'
                                             top="0"
                                             left="0rem"
+                                            margin="2rem"
 
                                         >
                                             Cadastrar
@@ -119,7 +121,7 @@ export function DeviceControlv2() {
                                             Cadastrar
                                         </Button>
                                         <Stack direction='row'>
-                                            <Switch colorScheme='teal' size='lg' />
+                                            <Switch colorScheme='blue' size='lg' />
                                         </Stack>
                                     </Flex>
                                 </Stack>
