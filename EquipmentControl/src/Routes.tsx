@@ -1,10 +1,11 @@
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { RegisterDevice } from './pages/RegisterDevice'
+import { RegisterDevice } from './pages/--old_RegisterDevice'
 import { Dashboard } from './pages/Dashboard'
 import { DeviceControl } from './pages/DeviceControl'
 import { Reports } from './pages/Reports'
 import { NoPage } from './pages/NoPage'
+import { DeviceControlv2 } from './pages/DeviceControlv2'
 
 
 export function Routes() {
@@ -18,7 +19,7 @@ export function Routes() {
                     <RegisterDevice />
                 </Route>
                 <Route path="/device-control">
-                    <DeviceControl />
+                    <DeviceControlv2 />
                 </Route>
                 <Route path="/reports">
                     <Reports />

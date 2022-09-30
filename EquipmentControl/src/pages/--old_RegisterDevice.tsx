@@ -17,12 +17,12 @@ export function RegisterDevice() {
             pos="relative"
             top="5rem"
             right="1rem"
-            left="3rem"
-            h="40rem"
+            left="22rem"
+            h="35rem"
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
             borderRadius="1.6875rem"
-            w="100rem"
+            w="60rem"
             flexDir="column"
             justifyContent="space-between"
             backgroundColor="#f1f1f1 !important"
@@ -59,7 +59,7 @@ export function RegisterDevice() {
                             colorScheme='blackAlpha'
                             variant='outline'
                             top="5rem"
-                            left="5rem"
+                            left="0rem"
                         >
                             Cadastrar
                         </Button>
