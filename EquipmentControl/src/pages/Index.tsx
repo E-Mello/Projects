@@ -1,5 +1,5 @@
 import { Avatar, Divider, Flex, Heading, IconButton, Link, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Component, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsJournalBookmarkFill } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
@@ -11,9 +11,19 @@ import { NavItem } from "../components/NavItem";
 
 export function Index() {
     const [navSize, changeNavSize] = useState("large")
-    const [content, setContent] = useState(0)
-    const [component, setComponent] = useState(Object)
-    function handdleChangeContent() {
+    const [content, setContent] = useState(1)
+    const [component, setComponent] = useState([
+        {
+            index: 1,
+        },
+        {
+            index: 2,
+        },
+        {
+            index: 3,
+        },
+    ])
+    function handdleChangeContent(component: Component) {
         setContent(1);
         if (content == 1) {
             return <Dashboard />
@@ -59,7 +69,9 @@ export function Index() {
                                     changeNavSize("small")
                             }}
                         />
-                        <NavItem onClick={handdleChangeContent} navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                        <Link onClick={handdleChangeContent} >
+                            <NavItem navSize={navSize} icon={MdDashboard} title="Dashboard"></NavItem>
+                        </Link>
                         <NavItem navSize={navSize} icon={BiEdit} title="Controle de Aparelhos"></NavItem>
                         <NavItem navSize={navSize} icon={TbReport} title="Relatórios"></NavItem>
                     </Flex>
@@ -100,7 +112,7 @@ export function Index() {
                     transition={navSize == "large" ? "all 0.3s ease-in" : "ease"}
                 >
                     <Flex>
-                        {component}
+
                     </Flex>
                 </Flex>
             </Flex>
