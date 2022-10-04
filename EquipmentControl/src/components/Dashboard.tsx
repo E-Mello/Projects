@@ -57,8 +57,17 @@ ChartJS.register(
 
 export function Dashboard() {
     return (
-        <>
+        <Flex
+            pos="relative"
+            marginTop="2.5vh"
+            boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
+            borderRadius="1.6875rem"
+            w="100%"
+            flexDir="column"
+            justifyContent="space-between"
+            backgroundColor="#f1f1f1 !important"
+        >
             <Line data={data} options={options} />
-        </>
+        </Flex>
     );
 }

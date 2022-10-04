@@ -1,20 +1,18 @@
 import {
+    Accordion,
+    AccordionButton,
+    AccordionIcon,
+    AccordionItem,
+    AccordionPanel,
+    Box,
+    Button,
     Flex,
-    Heading,
-    Tab,
-    Table,
-    TableCaption,
-    TableContainer,
-    TabList,
-    TabPanel,
-    TabPanels,
-    Tabs,
-    Tbody,
-    Td,
-    Tfoot,
-    Th,
-    Thead,
-    Tr
+    FormControl,
+    FormLabel,
+    Input,
+    Stack,
+    Switch,
+
 } from "@chakra-ui/react";
 
 export function DeviceControl() {
@@ -22,95 +20,168 @@ export function DeviceControl() {
 
         <Flex
             pos="relative"
-            right="1rem"
-            left="3rem"
-            h="95vh"
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
             borderRadius="1.6875rem"
-            w="100rem"
+            w="100%"
             flexDir="column"
             justifyContent="space-between"
             backgroundColor="#f1f1f1 !important"
         >
-            <Tabs align='end' variant='enclosed'>
-                <TabList>
-                    <Tab _selected={{ color: 'white', bg: 'green.400' }} borderRadius="1.6875rem 0 0 0">One</Tab>
-                    <Tab _selected={{ color: 'white', bg: 'green.400' }} borderRadius="0 1.6875rem 0 0">Two</Tab>
-                </TabList>
-                <TabPanels>
-                    <TabPanel>
-                        <TableContainer>
-                            <Table variant='striped' colorScheme='blackAlpha'>
-                                <TableCaption>Relatorio de aparelhos x prestadores</TableCaption>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Codigo do prestador</Th>
-                                        <Th>Nome do prestador</Th>
-                                        <Th>Quantidade atual de aparelhos locados</Th>
-                                        <Th>Serie dos aparelhos locados</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    <Tr>
-                                        <Td>279002000030</Td>
-                                        <Td>FUNDACAO DE SAUDE COMUNITARIA DE SINOP</Td>
-                                        <Td>2</Td>
-                                        <Td>1542489</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>279002000030</Td>
-                                        <Td>FUNDACAO DE SAUDE COMUNITARIA DE SINOP</Td>
-                                        <Td>2</Td>
-                                        <Td>1542489</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>279002000030</Td>
-                                        <Td>FUNDACAO DE SAUDE COMUNITARIA DE SINOP</Td>
-                                        <Td>2</Td>
-                                        <Td>1542489</Td>
-                                    </Tr>
-                                </Tbody>
-                            </Table>
-                        </TableContainer>
-                    </TabPanel>
-                    <TabPanel>
-                        <TableContainer>
-                            <Table variant='striped' colorScheme='blackAlpha'>
-                                <TableCaption>Relatorio de aparelhos x prestadores</TableCaption>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Codigo do prestador</Th>
-                                        <Th>Nome do prestador</Th>
-                                        <Th>Quantidade atual de aparelhos locados</Th>
-                                        <Th>Serie dos aparelhos locados</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    <Tr>
-                                        <Td>279002000013</Td>
-                                        <Td>HOSPITAL E MATERNIDADE DOIS PINHEIROS LTDA</Td>
-                                        <Td>1</Td>
-                                        <Td>9852361</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>279002000013</Td>
-                                        <Td>HOSPITAL E MATERNIDADE DOIS PINHEIROS LTDA</Td>
-                                        <Td>1</Td>
-                                        <Td>9852361</Td>
-                                    </Tr>
-                                    <Tr>
-                                        <Td>279002000013</Td>
-                                        <Td>HOSPITAL E MATERNIDADE DOIS PINHEIROS LTDA</Td>
-                                        <Td>1</Td>
-                                        <Td>9852361</Td>
-                                    </Tr>
-                                </Tbody>
-                            </Table>
-                        </TableContainer>
-                    </TabPanel>
-                </TabPanels>
-            </Tabs>
-        </Flex>
+            <Accordion
+                defaultIndex={[0]}
+                allowMultiple
+                borderRadius="1.6875rem"
+                w="99%"
+                pos="absolute"
+                left="0.5rem"
+            >
+                <AccordionItem
+                    borderRadius="2rem"
+                >
+                    <AccordionButton>
+                        <Box
+                            flex='1'
+                            textAlign='left'
+                            borderRadius="1.7rem"
+                        >
+                            Aparelho
+                        </Box>
+                        <AccordionIcon />
+
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
+                        <Flex
+                            pos="sticky"
+                            flexDir="row"
+                            alignItems="center"
+                            top="15rem"
+                        >
+                            <FormControl
+                                pos="relative"
+                                flexDir="row"
+                                alignItems="center"
+                                width="25rem"
+                                left="5rem"
+                            >
+                                <Stack marginBottom="0.5rem">
+                                    <FormLabel>Modelo do Leitor</FormLabel>
+                                    <Input placeholder='Ex: BIOFII-S174' size='md' fontSize={15} />
+                                </Stack>
+                                <Stack>
+                                    <FormLabel>Serie do Leitor</FormLabel>
+                                    <Input placeholder='Ex: 150675' size='md' fontSize={15} />
+                                </Stack>
+                            </FormControl>
+                            <Flex
+                                marginLeft="10rem"
+                                display="inline-flex"
+                            >
+                                <Stack
+                                    direction='column'
+                                    spacing={2}
+                                    align='center'
+                                    display="flex"
+                                >
+                                    <Flex display="inline">
+                                        <Button
+                                            colorScheme='cyan'
+                                            variant='outline'
+                                            top="0"
+                                            left="0rem"
+                                            margin="2rem"
+
+                                        >
+                                            Cadastrar
+                                        </Button>
+                                        <Stack
+                                            direction='row'
+                                        >
+
+                                            <Switch
+                                                left="2rem"
+                                                colorScheme='cyan'
+                                                size='lg'
+                                            />
+                                        </Stack>
+                                        Ativar/Desativar
+                                    </Flex>
+                                </Stack>
+                            </Flex>
+                        </Flex>
+                    </AccordionPanel>
+                </AccordionItem>
+
+                <AccordionItem>
+                    <h2>
+                        <AccordionButton>
+                            <Box flex='1' textAlign='left' borderRadius="2rem">
+                                Vincular/Desvincular
+                            </Box>
+                            <AccordionIcon />
+                        </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4}>
+                        <Flex
+                            pos="sticky"
+                            flexDir="row"
+                            alignItems="center"
+                            top="15rem"
+                        >
+                            <FormControl
+                                pos="relative"
+                                flexDir="row"
+                                alignItems="center"
+                                width="25rem"
+                                left="5rem"
+                            >
+                                <Stack marginBottom="0.5rem">
+                                    <FormLabel>Serie do Leitor</FormLabel>
+                                    <Input placeholder='Ex: 150675' size='md' fontSize={15} />
+                                </Stack>
+                                <Stack>
+                                    <FormLabel>Prestador</FormLabel>
+                                    <Input placeholder='Digite o código ou o nome' size='md' fontSize={15} />
+                                </Stack>
+                            </FormControl>
+                            <Flex
+                                marginLeft="10rem"
+                                display="inline-flex"
+                            >
+                                <Stack
+                                    direction='column'
+                                    spacing={2}
+                                    align='center'
+                                    display="flex"
+                                >
+                                    <Flex display="inline">
+                                        <Button
+                                            colorScheme='cyan'
+                                            variant='outline'
+                                            top="0"
+                                            left="0rem"
+                                            margin="2rem"
+
+                                        >
+                                            Cadastrar
+                                        </Button>
+                                        <Button
+                                            colorScheme='red'
+                                            variant='outline'
+                                            top="0"
+                                            left="0rem"
+                                            margin="2rem"
+                                            w="6.4475rem"
+                                        >
+                                            Desvincular
+                                        </Button>
+                                    </Flex>
+                                </Stack>
+                            </Flex>
+                        </Flex>
+                    </AccordionPanel>
+                </AccordionItem>
+            </Accordion >
+        </Flex >
     );
 }
