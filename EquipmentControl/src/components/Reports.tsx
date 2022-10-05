@@ -19,8 +19,7 @@ import {
 export function Reports() {
     return (
         <Flex
-            pos="relative"
-            h="50rem"
+            pos="relative"  
             marginTop="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0,0,0,0.5)"
             borderRadius="1.6875rem"

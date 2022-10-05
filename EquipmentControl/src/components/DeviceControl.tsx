@@ -12,10 +12,21 @@ import {
     Input,
     Stack,
     Switch,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
 
 } from "@chakra-ui/react";
+import React from "react";
 
 export function DeviceControl() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const btnRef = React.useRef()
     return (
 
         <Flex
@@ -45,7 +56,7 @@ export function DeviceControl() {
                             textAlign='left'
                             borderRadius="1.7rem"
                         >
-                            Aparelho
+                            Cadastrar Aparelho
                         </Box>
                         <AccordionIcon />
 
@@ -142,6 +153,32 @@ export function DeviceControl() {
                                 <Stack>
                                     <FormLabel>Prestador</FormLabel>
                                     <Input placeholder='Digite o código ou o nome' size='md' fontSize={15} />
+                                    <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                                        Open
+                                    </Button>
+                                    <Drawer
+                                        isOpen={isOpen}
+                                        placement='right'
+                                        onClose={onClose}
+                                        initialFocusRef={btnRef}
+                                    >
+                                        <DrawerOverlay />
+                                        <DrawerContent>
+                                            <DrawerCloseButton />
+                                            <DrawerHeader>Create your account</DrawerHeader>
+
+                                            <DrawerBody>
+                                                <Input placeholder='Type here...' />
+                                            </DrawerBody>
+
+                                            <DrawerFooter>
+                                                <Button variant='outline' mr={3} onClick={onClose}>
+                                                    Cancel
+                                                </Button>
+                                                <Button colorScheme='blue'>Save</Button>
+                                            </DrawerFooter>
+                                        </DrawerContent>
+                                    </Drawer>
                                 </Stack>
                             </FormControl>
                             <Flex
@@ -163,7 +200,7 @@ export function DeviceControl() {
                                             margin="2rem"
 
                                         >
-                                            Cadastrar
+                                            Vincular
                                         </Button>
                                         <Button
                                             colorScheme='red'

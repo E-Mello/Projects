@@ -20,13 +20,6 @@ import { NavItem } from "../components/NavItem";
 
 export function Index() {
     const [navSize, changeNavSize] = useState("large")
-    const [content, setContent] = useState(1)
-    function handdleChangeContent() {
-        setContent(1);
-        if (content == 1) {
-            return <Dashboard />
-        }
-    }
 
     return (
         <Flex w="100%">
@@ -103,9 +96,9 @@ export function Index() {
                 >
                     <Flex
                         pos="relative"
-                        h="97.5%"
+                        h="98rem"
                         left="1rem"
-                        marginTop="2.5vh"
+                        marginTop=""
                         borderRadius="4rem"
                         w={navSize == "small" ? "100%" : "99%"}
                         justifyContent="space-between"
