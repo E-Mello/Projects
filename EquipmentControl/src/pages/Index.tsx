@@ -96,7 +96,7 @@ export function Index() {
                 >
                     <Flex
                         pos="relative"
-                        h="98rem"
+                        h="56.5rem"
                         left="1rem"
                         marginTop=""
                         borderRadius="4rem"

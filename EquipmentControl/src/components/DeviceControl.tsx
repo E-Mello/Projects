@@ -153,32 +153,36 @@ export function DeviceControl() {
                                 <Stack>
                                     <FormLabel>Prestador</FormLabel>
                                     <Input placeholder='Digite o código ou o nome' size='md' fontSize={15} />
-                                    <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
-                                        Open
-                                    </Button>
-                                    <Drawer
-                                        isOpen={isOpen}
-                                        placement='right'
-                                        onClose={onClose}
-                                        initialFocusRef={btnRef}
-                                    >
-                                        <DrawerOverlay />
-                                        <DrawerContent>
-                                            <DrawerCloseButton />
-                                            <DrawerHeader>Create your account</DrawerHeader>
+                                    <>
+                                        <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                                            Procurar Prestador
+                                        </Button>
+                                        <Drawer
+                                            isOpen={isOpen}
+                                            placement='right'
+                                            onClose={onClose}
+                                            finalFocusRef={btnRef}
+                                        >
+                                            <DrawerOverlay />
+                                            <DrawerContent>
+                                                <DrawerCloseButton />
+                                                <DrawerHeader>Create your account</DrawerHeader>
 
-                                            <DrawerBody>
-                                                <Input placeholder='Type here...' />
-                                            </DrawerBody>
+                                                <DrawerBody>
+                                                    <Input placeholder='Type here...' />
+                                                </DrawerBody>
 
-                                            <DrawerFooter>
-                                                <Button variant='outline' mr={3} onClick={onClose}>
-                                                    Cancel
-                                                </Button>
-                                                <Button colorScheme='blue'>Save</Button>
-                                            </DrawerFooter>
-                                        </DrawerContent>
-                                    </Drawer>
+                                                <DrawerFooter>
+                                                    <Button variant='outline' mr={3} onClick={onClose}>
+                                                        Cancel
+                                                    </Button>
+                                                    <Button colorScheme='blue' mr={8} onClick={onClose}>
+                                                        Selecionar
+                                                    </Button>
+                                                </DrawerFooter>
+                                            </DrawerContent>
+                                        </Drawer>
+                                    </>
                                 </Stack>
                             </FormControl>
                             <Flex
