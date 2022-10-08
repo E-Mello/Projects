@@ -1,0 +1,189 @@
+#CURSO PLSQL, CANAL PONTO E VÍRGULA - AULA 2 CONFIGURANDO AMBIENTE LINUX
+#milene mancini vasconcelos
+
+#mostrar release:  cat /etc/os-release
+
+#atualizando:
+ sudo apt-get update
+
+#pacote de pré requisito oracle:
+ sudo apt-get install alien libaio1 libaio-dev sysstat unixodbc-dev libelf-dev flex build-essential gawk ksh libtool
+
+#criando grupos e usuários
+ sudo addgroup oinstall
+ sudo addgroup dba
+ sudo addgroup nobody
+ sudo usermod -g nobody nobody
+
+#usuário oracle
+ sudo useradd -g oinstall -G dba -p password -d /home/oracle -s /bin/bash oracle
+ sudo passwd oracle
+
+#diretório usuário oracle
+ sudo mkdir /home/oracle
+ sudo chown -R oracle:dba /home/oracle
+
+#seu usuário em todos os grupos criados
+ sudo addgroup mello oinstall
+ sudo addgroup mello dba
+ sudo addgroup mello nobody
+
+#links simbólicos
+ sudo ln -s /usr/lib/i386-linux-gnu/libpthread_nonshared.a /usr/lib
+ sudo ln -s /usr/lib/i386-linux-gnu/libc_nonshared.a /usr/lib
+ sudo ln -s /lib/i386-linux-gnu/libgcc_s.so.1 /lib
+ sudo ln -s /usr/lib/i386-linux-gnu/libstdc++.so.6 /usr/lib
+ sudo ln -s /usr/bin/awk /bin/awk
+ sudo ln -s /usr/bin/rpm /bin/rpm
+ sudo ln -s /usr/bin/basename /bin/basename
+ sudo mkdir /etc/rc.d
+
+#diretórios Oracle Express
+ sudo mkdir -p /u01/app/oracle
+ sudo chown -R oracle:dba /u01
+
+#ajustar o chkconfig (no final)
+ sudo nano /sbin/chkconfig
+
+ #!/bin/bash
+ file=/etc/init.d/oracle-xe
+ if [[ ! `tail -n1 $file | grep INIT` ]]; then
+ echo >> $file
+ echo '### BEGIN INIT INFO' >> $file
+ echo '# Provides: OracleXE' >> $file
+ echo '# Required-Start: $remote_fs $syslog' >> $file
+ echo '# Required-Stop: $remote_fs $syslog' >> $file
+ echo '# Default-Start: 2 3 4 5' >> $file
+ echo '# Default-Stop: 0 1 6' >> $file
+ echo '# Short-Description: Oracle 11g Express Edition' >> $file
+ echo '### END INIT INFO' >> $file
+ fi
+ update-rc.d oracle-xe defaults 80 01
+
+#permissão chkconfig
+ sudo chmod 755 /sbin/chkconfig
+
+#atualização da configuração do sistema no arquivo sysctl.conf (no final)
+ sudo nano /etc/sysctl.conf
+
+ # Configurações para o Oracle 11g XE
+ fs.file-max = 65535
+ kernel.shmall = 2097152
+ kernel.shmmax = 2147483648
+ kernel.shmmni = 4096
+ kernel.sem = 250 32000 100 128
+ net.ipv4.ip_local_port_range = 1024 65535
+ net.core.rmem_default = 1048576
+ net.core.rmem_max = 1048576
+ net.core.wmem_default = 262144
+ net.core.wmem_max = 262144
+
+#Integração das configurações do Oracle XE no limits.conf
+ sudo nano /etc/security/limits.conf
+
+# Configurações para o Oracle 11g XE (no final)
+ oracle soft nproc 2047
+ oracle hard nproc 16383
+ oracle soft nofile 1023
+ oracle hard nofile 65535
+ 
+###REINICIE SUA MAQUINA###
+
+https://drive.google.com/file/d/1fmCCnAWoDy1XWS8i6hUYmzvvJGlvvawj/view?usp=sharing
+
+#senha do seu usuário root:
+sudo passwd root
+
+#acessar com o usuário root
+su root
+
+#conver de .rpm para .deb:
+sudo alien --scripts oracle-xe-11.2.0-1.0.x86_64.rpm
+
+#executar
+sudo dpkg -i oracle-xe_11.2.0-2_amd64.deb 
+
+#configurar o profile
+sudo nano /etc/profile
+
+#acrescentar (no final)
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+export ORACLE_SID=XE
+export PATH=$PATH:/u01/app/oracle/product/11.2.0/xe
+export ORACLE_BASE=/u01/app/oracle
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+export ORACLE_OWNR=oracle
+export PATH=$PATH:$ORACLE_HOME/bin
+
+#vamos abrir o diretório home.
+cd /home
+
+#executar no /home
+source $HOME/.profile
+
+#entrar no diretorio
+cd /u01/app/oracle/product/11.2.0/xe/dbs
+
+#renomear arquivo
+mv init.ora initXE.ora
+
+#start, stop, restart e configure.
+sudo nano /etc/init.d/oracle-xe
+
+#acrescentar (no começo depois dos comentários)
+# Create /var/lock/subsys/listener and /var/lock/subsys/oracle-xe.
+# Files required by Oracle during some action to be service (start, stop, restart, configure).
+if [ ! -d "/var/lock/subsys" ]; then(
+mkdir /var/lock/subsys
+if [ ! -f "/var/lock/subsys/oracle-xe" ]; then
+touch /var/lock/subsys/oracle-xe
+fi
+if [ ! -f "/var/lock/subsys/listener" ]; then
+touch /var/lock/subsys/listener
+fi
+)else(
+if [ ! -f "/var/lock/subsys/oracle-xe" ]; then
+touch /var/lock/subsys/oracle-xe
+fi
+if [ ! -f "/var/lock/subsys/listener" ]; then
+touch /var/lock/subsys/listener
+fi
+
+)fi
+#End
+
+#executar o comando de configuração
+sudo /etc/init.d/oracle-xe configure
+
+#Instalar o JDK
+sudo apt-get install openjdk-8-jdk
+
+https://drive.google.com/file/d/1bUJEXtEoNr_RWfzU7PYjkhI8korsHUDs/view?usp=sharing
+
+#converte-lo de .rpm e para .deb
+sudo alien --scripts sqldeveloper-19.2.1.247.2212.noarch.rpm
+
+#executar o arquivo .deb
+sudo dpkg -i sqldeveloper_19.2.1-248.2212_all.deb
+ 
+#diretório
+cd /opt/sqldeveloper
+
+#permissao
+sudo chmod +x sqldeveloper.sh
+
+#executar
+sudo ./sqldeveloper.sh
+
+
+#se der erro do jdk
+
+sudo nano /opt/sqldeveloper/sqldeveloper/bin/sqldeveloper.conf
+
+Adicionar no conteudo:
+SetSkipJ2SDKCheck true
+
+#Link YouTube-Tutorial
+https://youtu.be/uVhftg1XV7s 
+
+https://youtu.be/ndSgcxI5siI
