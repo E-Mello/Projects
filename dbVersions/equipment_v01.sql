@@ -24,12 +24,11 @@ DROP TABLE IF EXISTS `equipamento`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipamento` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
   `modelo` varchar(255) NOT NULL,
   `serie` varchar(255) NOT NULL,
   `id-prestador` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +37,7 @@ CREATE TABLE `equipamento` (
 
 LOCK TABLES `equipamento` WRITE;
 /*!40000 ALTER TABLE `equipamento` DISABLE KEYS */;
-INSERT INTO `equipamento` VALUES (1,'Biometrico','Digital001','00000M54',0),(2,'Biometrico','Digital001','1111TG4',0),(3,'Cartao','Cartao001','555HTTX',0),(4,'Cartao','Cartao001','888JH32',0);
+INSERT INTO `equipamento` VALUES (1,'Digital001','00000M54',0),(2,'Digital001','1111TG4',0),(3,'Cartao001','555HTTX',0),(4,'Cartao001','888JH32',0),(6,'BIOF-S174','3216QW',NULL);
 /*!40000 ALTER TABLE `equipamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-23 21:03:37
+-- Dump completed on 2022-10-24  6:26:38
