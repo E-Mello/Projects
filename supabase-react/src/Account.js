@@ -4,80 +4,88 @@ import {
     Flex,
     FormControl,
     FormLabel,
-    Heading,
     Input,
     Stack,
     Text,
     useColorModeValue,
-    useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from 'react'
 
-import Avatar from './Avatar'
 import PersonalAvatar from './PersonalAvatar'
 import { supabase } from './supabaseClient'
+import { useToast } from "@chakra-ui/react";
 
 const Account = ({ session }) => {
     const [loading, setLoading] = useState(true)
     const [username, setUsername] = useState(null)
     const [website, setWebsite] = useState(null)
     const [avatar_url, setAvatarUrl] = useState(null)
+    const toast = useToast();
 
     useEffect(() => {
         getProfile()
     }, [session])
 
-    const getProfile = async () => {
+    async function getProfile() {
         try {
-            setLoading(true)
-            const { user } = session
+            setLoading(true);
+            const user = supabase.auth.user();
 
             let { data, error, status } = await supabase
-                .from('profiles')
+                .from("profiles")
                 .select(`username, website, avatar_url`)
-                .eq('id', user.id)
-                .single()
+                .eq("id", user.id)
+                .single();
 
             if (error && status !== 406) {
-                throw error
+                throw error;
             }
 
             if (data) {
-                setUsername(data.username)
-                setWebsite(data.website)
-                setAvatarUrl(data.avatar_url)
+                setUsername(data.username);
+                setWebsite(data.website);
+                setAvatarUrl(data.avatar_url);
             }
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
-    const updateProfile = async (e) => {
-        e.preventDefault()
-
+    async function updateProfile({ username, website, avatar_url }) {
         try {
-            setLoading(true)
-            const { user } = session
-
+            setLoading(true);
+            const user = supabase.auth.user();
             const updates = {
                 id: user.id,
                 username,
                 website,
                 avatar_url,
                 updated_at: new Date(),
-            }
+            };
 
-            let { error } = await supabase.from('profiles').upsert(updates)
+            let { error } = await supabase.from("profiles").upsert(updates, {
+                returning: "minimal", // dont return the value after inserting
+            });
 
             if (error) {
-                throw error
+                throw error;
             }
+
+            toast({
+                title: "Profile updated",
+                position: "top",
+                variant: "subtle",
+                description: "",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
         } catch (error) {
-            alert(error.message)
+            alert(error.message);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
@@ -177,7 +185,7 @@ const Account = ({ session }) => {
                                 bg: 'green.500',
                             }}
                         >
-                            {loading  || 'Update'}	
+                            {loading || 'Update'}
                         </Button>
                     </Stack>
                 </Box>

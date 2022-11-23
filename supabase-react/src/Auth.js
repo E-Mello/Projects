@@ -24,7 +24,10 @@ export default function Auth() {
         try {
             setLoading(true);
             const { error } = await supabase.auth.signIn({ email });
-            if (error) throw error;
+            console.log(error)
+            if (error) {
+                console.log(error)
+            };
             toast({
                 title: "Account Created",
                 position: "top",
@@ -37,8 +40,8 @@ export default function Auth() {
             toast({
                 title: "Error ",
                 position: "top",
-                description: error.error_description || error.message,
-                status: "success",
+                description: Error,
+                status: "error",
                 duration: 5000,
                 isClosable: true,
             });
@@ -53,7 +56,7 @@ export default function Auth() {
                 minH={"100vh"}
                 align={"center"}
                 justify={"center"}
-                bg={useColorModeValue("gray.50", "gray.800")}
+                bg={useColorModeValue("blackAlpha.600", "blue.300")}
             >
                 <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                     <Heading fontSize={"4xl"}>Sign in to Supabase</Heading>
@@ -63,7 +66,7 @@ export default function Auth() {
                 </Stack>
                 <Box
                     rounded={"lg"}
-                    bg={useColorModeValue("white", "gray.700")}
+                    bg={useColorModeValue("green.600", "gray.700")}
                     boxShadow={"lg"}
                     p={8}
                 >
