@@ -37,8 +37,8 @@ export default function Auth() {
             toast({
                 title: "Error ",
                 position: "top",
-                description: error.error_description || error.message,
-                status: "success",
+                description: Error,
+                status: "error",
                 duration: 5000,
                 isClosable: true,
             });
@@ -48,7 +48,7 @@ export default function Auth() {
     };
 
     return (
-        <>
+        <Flex>
             <Flex
                 minH={"100vh"}
                 align={"center"}
@@ -56,49 +56,52 @@ export default function Auth() {
                 bg={useColorModeValue("gray.50", "gray.800")}
             >
                 <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-                    <Heading fontSize={"4xl"}>Sign in to Supabase</Heading>
-                    <Text fontSize={"lg"} color={"gray.600"}>
-                        Via Magic Link With Your Email Below 💕💕
-                    </Text>
-                </Stack>
-                <Box
-                    rounded={"lg"}
-                    bg={useColorModeValue("white", "gray.700")}
-                    boxShadow={"lg"}
-                    p={8}
-                >
-                    <Stack spacing={4}>
-                        <FormControl id="email">
-                            <FormLabel>Email Address</FormLabel>
-                            <Input
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                type="email"
-                            />
-                        </FormControl>
-                        <Stack spacing={10}>
-                            <Button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleLogin(email);
-                                }}
-                                isLoading={loading}
-                                loadingText="Signing in ..."
-                                colorScheme="teal"
-                                variant="outline"
-                                spinnerPlacement="start"
-                                bg={"blue.400"}
-                                color={"white"}
-                                _hover={{
-                                    bg: "blue.500",
-                                }}
-                            >
-                                {loading || "Send Magic Link"}
-                            </Button>
-                        </Stack>
+                    <Stack align={"center"}>
+                        <Heading fontSize={"4xl"}>Sign in to Supabase</Heading>
+                        <Text fontSize={"lg"} color={"gray.600"}>
+                            Via Magic Link With Your Email Below 💕💕
+                        </Text>
                     </Stack>
-                </Box>
+
+                    <Box
+                        rounded={"lg"}
+                        bg={useColorModeValue("white", "gray.700")}
+                        boxShadow={"lg"}
+                        p={8}
+                    >
+                        <Stack spacing={4}>
+                            <FormControl id="email">
+                                <FormLabel>Email Address</FormLabel>
+                                <Input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="email"
+                                />
+                            </FormControl>
+                            <Stack spacing={10}>
+                                <Button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleLogin(email);
+                                    }}
+                                    isLoading={loading}
+                                    loadingText="Signing in ..."
+                                    colorScheme="teal"
+                                    variant="outline"
+                                    spinnerPlacement="start"
+                                    bg={"blue.400"}
+                                    color={"white"}
+                                    _hover={{
+                                        bg: "blue.500",
+                                    }}
+                                >
+                                    {loading || "Send Magic Link"}
+                                </Button>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Stack>
             </Flex>
-        </>
+        </Flex>
     )
 }

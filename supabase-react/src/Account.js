@@ -17,7 +17,7 @@ import Avatar from './Avatar'
 import PersonalAvatar from './PersonalAvatar'
 import { supabase } from './supabaseClient'
 
-const Account = ({ session }) => {
+export default function Account({ session }) {
     const [loading, setLoading] = useState(true)
     const [username, setUsername] = useState(null)
     const [website, setWebsite] = useState(null)
@@ -177,7 +177,7 @@ const Account = ({ session }) => {
                                 bg: 'green.500',
                             }}
                         >
-                            {loading  || 'Update'}	
+                            {loading || 'Update'}
                         </Button>
                     </Stack>
                 </Box>
@@ -186,4 +186,3 @@ const Account = ({ session }) => {
     )
 }
 
-export default Account
