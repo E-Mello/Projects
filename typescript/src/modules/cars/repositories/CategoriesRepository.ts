@@ -1,16 +1,22 @@
+import {
+    ICategoriesRepository,
+    ICreateCategoryDTO,
+} from './ICategoriesRepository';
+
 import Category from '../model/Category';
 
 /**
- * DTO => Data Transfer Object
+ * Aqui estou dizendo que a classe CategoriesRepository vai implementar a interface ICategoriesRepository.
  */
-interface ICreateCategoryDTO {
-    name: string;
-    description: string;
-}
-
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
+    /**
+     * Aqui estou dizendo que a variável "categories" é um array de categorias, e que esse array vai começar vazio.
+     */
     private categories: Category[];
 
+    /**
+     * No construtor, eu estou dizendo que a variável "categories" é um array de categorias, e que esse array vai começar vazio.
+     */
     constructor() {
         this.categories = [];
     }
@@ -44,6 +50,16 @@ class CategoriesRepository {
      */
     list(): Category[] {
         return this.categories;
+    }
+
+    /**
+     *  O "findByName" é um método que vai receber um parâmetro do tipo string, e vai retornar uma categoria.
+     */
+    findByName(name: string): Category {
+        const category = this.categories.find(
+            (category) => category.name === name
+        );
+        return category;
     }
 }
 

@@ -1,7 +1,8 @@
 /**
  * CategoriesRepository é o repositório que eu criei para fazer a comunicação com o banco de dados
  */
-import { CategoriesRepository } from '../repositories/CategoriesRepository';
+import { CategoriesRepository } from '../modules/cars/repositories/CategoriesRepository';
+import { CreateCategoryService } from '../modules/cars/services/CreateCategoryService';
 /**
  * O "Router" é uma função que retorna um objeto, e esse objeto tem várias funções que são as rotas.
  */
@@ -28,9 +29,16 @@ categoriesRoutes.post('/', (req, res) => {
     const { name, description } = req.body;
 
     /**
-     * Aqui estou chamando o método "create" do meu repositório, e passando o "name" e "description" que eu recebi do corpo da requisição.
+     * Aqui estou criando uma instância do meu service, e passando o repositório de categoria para ele.
      */
-    categoriesRepository.create({ name, description });
+    const createCategoryService = new CreateCategoryService(
+        categoriesRepository
+    );
+
+    /**
+     * Aqui estou chamando o método execute do meu service, e passando o "name" e "description" que eu recebi do corpo da requisição.
+     */
+    createCategoryService.execute({ name, description });
 
     /**
      * Aqui estou retornando uma resposta para o usuário, e estou dizendo que a resposta foi um sucesso, e que não tem conteúdo,
@@ -45,8 +53,14 @@ categoriesRoutes.post('/', (req, res) => {
  * ou seja, que ele liste todas as categorias.
  */
 categoriesRoutes.get('/', (req, res) => {
+    /**
+     * Aqui estou chamando o método list do meu repositório, e estou guardando o retorno dele na variável "all".
+     */
     const all = categoriesRepository.list();
 
+    /**
+     * Aqui estou retornando uma resposta para o usuário, e estou dizendo que a resposta foi um sucesso, e que tem conteúdo,
+     */
     return res.json(all);
 });
 
