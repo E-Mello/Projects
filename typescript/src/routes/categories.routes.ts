@@ -2,11 +2,12 @@
  * CategoriesRepository é o repositório que eu criei para fazer a comunicação com o banco de dados
  */
 import { CategoriesRepository } from '../modules/cars/repositories/CategoriesRepository';
-import { CreateCategoryService } from '../modules/cars/services/CreateCategoryService';
 /**
  * O "Router" é uma função que retorna um objeto, e esse objeto tem várias funções que são as rotas.
  */
 import { Router } from 'express';
+import { createCategoryController } from '../modules/cars/useCases/createCategory';
+import { listCategoriesController } from '../modules/cars/useCases/listCategories';
 
 /**
  * Aqui estou criando uma instância do meu repositório, para que eu possa utilizar ele em todas as rotas.
@@ -20,48 +21,17 @@ const categoriesRepository = new CategoriesRepository();
 
 /**
  * Aqui estou dizendo que quando eu receber uma requisição do tipo "post" na rota "/categories", eu quero que ele execute a função que está dentro
- * do segundo parâmetro.
  */
-categoriesRoutes.post('/', (req, res) => {
-    /**
-     * Aqui estou definindo o que vou receber do corpo da requisição
-     */
-    const { name, description } = req.body;
-
-    /**
-     * Aqui estou criando uma instância do meu service, e passando o repositório de categoria para ele.
-     */
-    const createCategoryService = new CreateCategoryService(
-        categoriesRepository
-    );
-
-    /**
-     * Aqui estou chamando o método execute do meu service, e passando o "name" e "description" que eu recebi do corpo da requisição.
-     */
-    createCategoryService.execute({ name, description });
-
-    /**
-     * Aqui estou retornando uma resposta para o usuário, e estou dizendo que a resposta foi um sucesso, e que não tem conteúdo,
-     * pois o que eu quero é que ele apenas saiba que a requisição foi bem sucedida e a função send() é para retornar uma resposta vazia, pois
-     * não vamos deixar a função create com a responsabilidade de retornar uma resposta para o usuário.
-     */
-    return res.status(201).send();
+categoriesRoutes.post('/', (request, response) => {
+    return createCategoryController.handle(request, response);
 });
 
 /**
  * Aqui estou dizendo que quando eu receber uma requisição do tipo "get" na rota "/categories", eu quero que ele execute a função que está dentro
  * ou seja, que ele liste todas as categorias.
  */
-categoriesRoutes.get('/', (req, res) => {
-    /**
-     * Aqui estou chamando o método list do meu repositório, e estou guardando o retorno dele na variável "all".
-     */
-    const all = categoriesRepository.list();
-
-    /**
-     * Aqui estou retornando uma resposta para o usuário, e estou dizendo que a resposta foi um sucesso, e que tem conteúdo,
-     */
-    return res.json(all);
+categoriesRoutes.get('/', (request, response) => {
+    return listCategoriesController.handle(request, response);
 });
 
 export { categoriesRoutes };
