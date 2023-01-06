@@ -1,7 +1,5 @@
-import { categoriesRoutes } from './routes/categories.routes';
-// import { createCourse } from './routes';
 import express from 'express';
-import { specificationsRoutes } from './routes/specifications.routes';
+import { router } from './routes';
 
 /**
  * A const app recebe o express, que é uma função que retorna um objeto do tipo express. Que faz a aplicação rodar.
@@ -13,11 +11,7 @@ const app = express();
  */
 app.use(express.json());
 
-/**
- * O método use() é um middleware que recebe uma rota e um callback.
- */
-app.use('/categories', categoriesRoutes);
-app.use('/specifications', specificationsRoutes);
+app.use(router);
 
 /**
  * O método listen() é um método que faz com que a aplicação fique escutando uma porta.

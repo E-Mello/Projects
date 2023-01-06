@@ -1,11 +1,12 @@
-import { CategoriesRepository } from '../../repositories/CategoriesRepository';
+import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
 import { ListCategoriesController } from './ListCategoriesController';
 import { ListCategoriesUseCase } from './ListCategoriesUseCase';
 
 /**
- * Aqui estou criando uma variável chamada "categoriesRepository", que vai ser um repositório de categoria.
+ * Aqui estou criando uma variável chamada "categoriesRepository", que vai ser um repositório de categoria, e que vai receber o repositório de categoria.
+ * O "getInstance" é um método estático, e o "CategoriesRepository" é o tipo de retorno do método.
  */
-const categoriesRepository = new CategoriesRepository();
+const categoriesRepository = CategoriesRepository.getInstance();
 /**
  * Aqui estou criando uma variável chamada "listCategoriesUseCase", que vai ser um useCase de listar categorias, e que vai receber o repositório de categoria.
  */

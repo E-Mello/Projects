@@ -1,20 +1,19 @@
-import { CreateSpecificationService } from '../modules/cars/services/CreateSpecificationService';
 import { Router } from 'express';
-import { SpecificationsRepository } from '../modules/cars/repositories/SpecificationsRepository';
+import { createSpecificationController } from '../modules/cars/useCases/createSpecification';
 
+/**
+ * speecificationsRoutes é uma const que recebe o Router() que é uma função que retorna um objeto do tipo Router.
+ */
 const specificationsRoutes = Router();
 
-const specificationsRepository = new SpecificationsRepository();
-
+/**
+ * O método post() é um método que recebe uma rota e um callback.
+ */
 specificationsRoutes.post('/', (request, response) => {
-    const { name, description } = request.body;
-    const createSpecificationService = new CreateSpecificationService(
-        specificationsRepository
-    );
-
-    createSpecificationService.execute({ name, description });
-
-    return response.status(201).json();
+    /**
+     * Aqui estou chamando o método handle do meu controller, e estou passando os dados que eu quero criar.
+     */
+    return createSpecificationController.handle(request, response);
 });
 
 export { specificationsRoutes };
