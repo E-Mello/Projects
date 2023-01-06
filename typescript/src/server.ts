@@ -1,5 +1,7 @@
 import express from 'express';
 import { router } from './routes';
+import swaggerFile from './swagger.json';
+import swaggerUi from 'swagger-ui-express';
 
 /**
  * A const app recebe o express, que é uma função que retorna um objeto do tipo express. Que faz a aplicação rodar.
@@ -10,6 +12,8 @@ const app = express();
  * O express.json() é um middleware que faz com que o express entenda o formato json.
  */
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(router);
 

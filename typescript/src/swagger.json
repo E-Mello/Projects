@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "version": "1.0.0",
+        "description": "This is my API",
+        "contact": {
+            "name": "Mello",
+            "url": "https://github.com/E-Mello",
+            "email": "e.mello.dev@gmail.com"
+        }
+    },
+    "paths": {
+        "/categories": {
+            "post": {
+                "summary": "Create a category",
+                "description": "Create a new category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Category name sample",
+                                    "description": "Description for category 1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Category created"
+                    },
+                    "500": {
+                        "description": "Category already exists"
+                    }
+                }
+            },
+            "get": {
+                "summary": "List all categories",
+                "description": "List all categories",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
