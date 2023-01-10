@@ -1,3 +1,12 @@
+/**
+ * sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' typescript
+ * o comando acima é para pegar o ip do container typescript
+ *
+ * sudo docker exec dbForTypescript cat /etc/hosts
+ * o comando acima é para pegar o ip do container dbForTypescript
+ */
+import './database';
+
 import express from 'express';
 import { router } from './routes';
 import swaggerFile from './swagger.json';

@@ -21,6 +21,8 @@ const upload = multer({
  * Aqui estou dizendo que quando eu receber uma requisição do tipo "post" na rota "/categories", eu quero que ele execute a função que está dentro
  */
 categoriesRoutes.post('/', (request, response) => {
+    console.log("Reload it's working!");
+
     return createCategoryController.handle(request, response);
 });
 
