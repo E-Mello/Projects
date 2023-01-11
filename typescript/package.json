@@ -7,7 +7,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "ts-node-dev --inspect --respawn --transpile-only --ignore-watch node_modules src/server.ts",
-        "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
+        "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+        "migration:generate": "typeorm migration:generate --config ./ormconfig.json --name CreateCategories"
     },
     "keywords": [],
     "author": "",
