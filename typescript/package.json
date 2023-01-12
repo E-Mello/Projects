@@ -8,7 +8,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "ts-node-dev --inspect --respawn --transpile-only --ignore-watch node_modules src/server.ts",
         "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-        "migration:generate": "typeorm migration:generate --config ./ormconfig.json --name CreateCategories"
+        "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/ migration:generate ./src/database/migration",
+        "migration:run": "typeorm-ts-none-commonjs -d ./src/database/ migration:run "
     },
     "keywords": [],
     "author": "",
