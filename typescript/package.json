@@ -6,10 +6,9 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "ts-node-dev --inspect --respawn --transpile-only --ignore-watch node_modules src/server.ts",
-        "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-        "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/ migration:generate ./src/database/migration",
-        "migration:run": "typeorm-ts-none-commonjs -d ./src/database/ migration:run "
+        "dev": "ts-node --transpile-only --ignore-watch node_modules src/server.ts",
+        "typeorm": "ts-node  typeorm",
+        "migration:generate": "ts-node typeorm migration:generate --config ormconfig.json"
     },
     "keywords": [],
     "author": "",
@@ -22,9 +21,11 @@
         "pg": "^8.8.0",
         "reflect-metadata": "^0.1.13",
         "swagger-ui-express": "^4.6.0",
+        "tsconfig-paths": "^4.1.2",
         "typeorm": "^0.3.11"
     },
     "devDependencies": {
+        "ts-node": "*",
         "@types/express": "^4.17.15",
         "@types/node": "^18.11.18",
         "@types/swagger-ui-express": "^4.1.3",
