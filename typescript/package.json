@@ -6,7 +6,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "ts-node --transpile-only --ignore-watch node_modules src/server.ts",
+        "dev": "ts-node-dev --transpile-only src/server.ts",
         "typeorm": "ts-node  typeorm",
         "migration:generate": "ts-node typeorm migration:generate --config ormconfig.json"
     },

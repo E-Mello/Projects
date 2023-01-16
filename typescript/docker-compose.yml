@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
-    image: postgres
+    image: postgres:12
     container_name: database_ignite
     restart: always
     ports:
@@ -13,20 +13,23 @@ services:
       - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "docker"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
     container_name: rentx
-    restart: always
+    restart: always #Se você quiser que o container reinicie sempre que ele parar, pode usar essa opção    
     ports:
-      - 3000:3000
+      - 3000:3000 # A porta 3000 é a porta que o servidor vai rodar
       - 9229:9229 #Você pode inserir essa porta tbm pra poder usar o debug
     volumes:
-      - .:/usr/app
-    links:
-      - database
+      - .:/usr/app #Isso é pra você poder editar os arquivos do container sem precisar ficar buildando ele toda hora
     depends_on:
-      - database
+      - database #Esse é o nome do service que você colocou no arquivo de conexão
 
 volumes:
   pgdata:
