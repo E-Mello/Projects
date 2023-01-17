@@ -1,5 +1,7 @@
 @E-Mello
 
+<!-- WebPage for help: https://maximorlov.com/4-reasons-why-your-docker-containers-cant-talk-to-each-other/#:~:text=Containers%20can%20only%20communicate%20with,can%20have%20multiple%20containers%20inside. -->
+
 ### You can check the IP address of the database service with the command docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name>
 
 ### You can check if the PostgreSQL service is running correctly, by connecting to the database service's shell:

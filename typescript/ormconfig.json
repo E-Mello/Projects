@@ -14,11 +14,11 @@
         "./src/database/subscribers/*.ts"
     ],
     "migrations": [
-        "./src/database/migrations/*.ts"
+        "~/JobSpace/Projects/typescript/src/database/migrations/*.ts"
     ],
     "cli": {
-        "entitiesDir": "entity",
-        "migrationsDir": "migration",
-        "subscribersDir": "subscriber"
+        "entitiesDir": "/src/database/entities",
+        "migrationsDir": "/src/database/migrations",
+        "subscribersDir": "/src/database/subscribers"
     }
 }
