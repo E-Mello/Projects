@@ -1,28 +1,35 @@
-version: '3.9'
+version: '3.9' #Isso é pra você poder usar a versão 3.9 do docker-compose
 
-services:
+networks: #Isso é pra você poder criar uma rede
+  default: #Esse é o nome da rede
+
+services: #Isso é pra você poder criar vários containers
   database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
-    image: postgres:12
-    container_name: database_ignite
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=ignite
-      - POSTGRES_DB=rentx
-    volumes:
-      - pgdata:/data/postgres
-    healthcheck:
-      test: ["CMD", "pg_isready", "-U", "docker"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    image: postgres:12 #Isso é pra você poder usar a imagem do postgres
+    container_name: database #Esse é o nome do container
+    restart: always #Se você quiser que o container reinicie sempre que ele parar, pode usar essa opção
+    ports: #Isso é pra você poder definir as portas que o container vai rodar
+      - 5432:5432 # A porta 5432 é a porta que o banco de dados vai rodar
+    environment: #Isso é pra você poder definir as variáveis de ambiente
+      - POSTGRES_USER=docker #Esse é o usuário do banco de dados
+      - POSTGRES_PASSWORD=ignite #Esse é a senha do banco de dados
+      - POSTGRES_DB=rentx #Esse é o nome do banco de dados
+    volumes: #Isso é pra você poder salvar os dados do banco de dados
+      - pgdata:/data/postgres #Isso é pra você poder salvar os dados do banco de dados
+    networks: 
+      - "default" #Isso é pra você poder usar a mesma rede do host
+    healthcheck: #Isso é pra você poder verificar se o banco de dados está rodando
+      test: ["CMD", "pg_isready", "-U", "docker"] #Isso é pra você poder verificar se o banco de dados está rodando
+      interval: 10s #Isso é pra você poder definir o intervalo de tempo que o healthcheck vai rodar
+      timeout: 5s #Isso é pra você poder definir o tempo que o healthcheck vai esperar pra dar timeout
+      retries: 5 #Isso é pra você poder definir quantas vezes o healthcheck vai rodar
 
-  app:
-    build: .
-    container_name: rentx
+  app: #Esse é o nome do service que você vai usar pra rodar o container
+    build: . #Isso é pra você poder buildar o container
+    container_name: rentx #Esse é o nome do container
     restart: always #Se você quiser que o container reinicie sempre que ele parar, pode usar essa opção    
+    networks: 
+      - "default" #Isso é pra você poder usar a mesma rede do host
     ports:
       - 3000:3000 # A porta 3000 é a porta que o servidor vai rodar
       - 9229:9229 #Você pode inserir essa porta tbm pra poder usar o debug
@@ -31,6 +38,6 @@ services:
     depends_on:
       - database #Esse é o nome do service que você colocou no arquivo de conexão
 
-volumes:
-  pgdata:
-    driver: local
+volumes: #Isso é pra você poder criar um volume pra salvar os dados do banco de dados
+  pgdata: #Esse é o nome do volume
+    driver: local #Isso é pra você poder usar o driver local
