@@ -7,18 +7,10 @@
     "database": "rentx",
     "logging": true,
     "synchronize": true,
-    "entities": [
-        "./src/database/entities/*.ts"
-    ],
-    "subscribers": [
-        "./src/database/subscribers/*.ts"
-    ],
     "migrations": [
-        "~/JobSpace/Projects/typescript/src/database/migrations/*.ts"
+        "./src/database/migrations/*.ts"
     ],
     "cli": {
-        "entitiesDir": "/src/database/entities",
-        "migrationsDir": "/src/database/migrations",
-        "subscribersDir": "/src/database/subscribers"
+        "migrationsDir": "./src/database/migrations"
     }
 }

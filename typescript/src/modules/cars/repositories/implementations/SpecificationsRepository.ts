@@ -3,7 +3,7 @@ import {
     ISpecificationsRepository,
 } from '../ISpecificationsRepository';
 
-import { Specification } from '../../model/Specification';
+import { Specification } from '../../entities/Specification';
 
 /**
  * @class SpecificationRepository - Implements the ISpecificationsRepository interface

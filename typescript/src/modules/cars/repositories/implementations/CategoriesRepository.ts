@@ -2,17 +2,15 @@ import {
     ICategoriesRepository,
     ICreateCategoryDTO,
 } from '../ICategoriesRepository';
+import { Repository, getRepository } from 'typeorm';
 
-import Category from '../../model/Category';
+import Category from '../../entities/Category';
 
 /**
  * Aqui estou dizendo que a classe CategoriesRepository vai implementar a interface ICategoriesRepository.
  */
 class CategoriesRepository implements ICategoriesRepository {
-    /**
-     * Aqui estou dizendo que a variável "categories" é um array de categorias, e que esse array vai começar vazio.
-     */
-    private categories: Category[];
+    private repository: Repository<Category>;
 
     /**
      * O "static" significa que o método "getInstance" é um método estático, e o "CategoriesRepository" é o tipo de retorno do método.
@@ -46,7 +44,7 @@ class CategoriesRepository implements ICategoriesRepository {
      * O "private" significa que o construtor da classe "CategoriesRepository" é privado, e o "constructor" é o nome do construtor.
      */
     private constructor() {
-        this.categories = [];
+        this.repository = getRepository(Category);
     }
 
     /**
@@ -54,39 +52,26 @@ class CategoriesRepository implements ICategoriesRepository {
      * vamos desestruturar essas propriedades.
      * O "void" depois do ICreateCategoryDTO, significa que o retorno da função é vazio.
      */
-    create({ name, description }: ICreateCategoryDTO): void {
-        /**
-         * Para chamar o construtor, é necessário colocar o "new no Category()"
-         */
-        const category = new Category();
-        /**
-         * O JavaScript tem uma função chamada Object.assign, que é possível passar um objeto para ele, no nosso caso passamos o "category",
-         * e depois passamos um objeto com as propriedades que queremos alterar, no nosso caso passamos o "name", "description" e "created_at".
-         */
-        Object.assign(category, {
-            name,
+    async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+        const category = this.repository.create({
             description,
-            created_at: new Date(),
+            name,
         });
 
-        this.categories.push(category);
+        await this.repository.save(category);
     }
 
-    /**
-     * O "list" é um método que vai retornar uma lista de categorias, e o "Category[]" significa que o retorno da função é um array
-     * de categorias.
-     */
-    list(): Category[] {
-        return this.categories;
+    async list(): Promise<Category[]> {
+        const categories = await this.repository.find();
+        return categories;
     }
 
     /**
      *  O "findByName" é um método que vai receber um parâmetro do tipo string, e vai retornar uma categoria.
      */
-    findByName(name: string): Category {
-        const category = this.categories.find(
-            (category) => category.name === name
-        );
+    async findByName(name: string): Promise<Category> {
+        //Select * from categories where name = "name" limit 1
+        const category = await this.repository.findOne({ });
         return category;
     }
 }

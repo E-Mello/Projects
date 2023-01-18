@@ -1,4 +1,4 @@
-import Category from '../model/Category';
+import Category from '../entities/Category';
 /**
  * DTO => Data Transfer Object
  */
@@ -11,9 +11,9 @@ interface ICreateCategoryDTO {
  * Interface que vai ser implementada na classe CategoriesRepository.
  */
 interface ICategoriesRepository {
-    findByName(name: string): Category;
-    list(): Category[];
-    create({ name, description }: ICreateCategoryDTO): void;
+    findByName(name: string): Promise<Category>;
+    list(): Promise<Category[]>;
+    create({ name, description }: ICreateCategoryDTO): Promise<void>;
 }
 
 export { ICategoriesRepository, ICreateCategoryDTO };
