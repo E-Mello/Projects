@@ -6,10 +6,13 @@ import { v4 as uuidV4 } from 'uuid';
 class Category {
     @PrimaryColumn() // Aqui é definido que o campo é a chave primária para o typeorm
     id?: string; 
+    
     @Column() // Aqui é definido que o campo é uma coluna para o typeorm
     name: string;
+    
     @Column()
     description: string;
+    
     @CreateDateColumn()
     created_at: Date;
 

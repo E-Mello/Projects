@@ -18,6 +18,13 @@ class CategoriesRepository implements ICategoriesRepository {
     private static INSTANCE: CategoriesRepository;
 
     /**
+     * O "private" significa que o construtor da classe "CategoriesRepository" é privado, e o "constructor" é o nome do construtor.
+     */
+    private constructor() {
+        this.repository = getRepository(Category);
+    }
+
+    /**
      * O "getInstance" é um método estático, e o "CategoriesRepository" é o tipo de retorno do método.
      * O conceito de singleton é que a gente vai ter uma única instância da classe "CategoriesRepository" em toda a aplicação,
      * com isso a gente consegue ter um controle maior sobre a nossa aplicação e sobre os dados que estão sendo manipulados.
@@ -38,13 +45,6 @@ class CategoriesRepository implements ICategoriesRepository {
          * o retorno do método "getInstance" é uma instância da classe "CategoriesRepository".
          */
         return CategoriesRepository.INSTANCE;
-    }
-
-    /**
-     * O "private" significa que o construtor da classe "CategoriesRepository" é privado, e o "constructor" é o nome do construtor.
-     */
-    private constructor() {
-        this.repository = getRepository(Category);
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoriesRepository implements ICategoriesRepository {
      */
     async findByName(name: string): Promise<Category> {
         //Select * from categories where name = "name" limit 1
-        const category = await this.repository.findOne({ });
+        const category = await this.repository.findOne({name});
         return category;
     }
 }
