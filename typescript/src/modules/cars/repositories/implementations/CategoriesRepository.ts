@@ -13,38 +13,10 @@ class CategoriesRepository implements ICategoriesRepository {
     private repository: Repository<Category>;
 
     /**
-     * O "static" significa que o método "getInstance" é um método estático, e o "CategoriesRepository" é o tipo de retorno do método.
-     */
-    private static INSTANCE: CategoriesRepository;
-
-    /**
      * O "private" significa que o construtor da classe "CategoriesRepository" é privado, e o "constructor" é o nome do construtor.
      */
-    private constructor() {
+    constructor() {
         this.repository = getRepository(Category);
-    }
-
-    /**
-     * O "getInstance" é um método estático, e o "CategoriesRepository" é o tipo de retorno do método.
-     * O conceito de singleton é que a gente vai ter uma única instância da classe "CategoriesRepository" em toda a aplicação,
-     * com isso a gente consegue ter um controle maior sobre a nossa aplicação e sobre os dados que estão sendo manipulados.
-     * porém o singleton não é uma boa prática, pois ele pode dificultar a testabilidade da nossa aplicação e
-     * deve ser usado somente quando for necessário para os casos em que a gente não pode ter mais de uma instância da classe "CategoriesRepository".
-     */
-    public static getInstance(): CategoriesRepository {
-        /**
-         * O "!" significa que o "CategoriesRepository.INSTANCE" não é nulo, e o "CategoriesRepository.INSTANCE" é uma variável estática,
-         */
-        if (!CategoriesRepository.INSTANCE) {
-            /**
-             * O "CategoriesRepository.INSTANCE" é uma variável estática, e o "new CategoriesRepository()" é uma instância da classe "CategoriesRepository".
-             */
-            CategoriesRepository.INSTANCE = new CategoriesRepository();
-        }
-        /**
-         * o retorno do método "getInstance" é uma instância da classe "CategoriesRepository".
-         */
-        return CategoriesRepository.INSTANCE;
     }
 
     /**
@@ -71,7 +43,7 @@ class CategoriesRepository implements ICategoriesRepository {
      */
     async findByName(name: string): Promise<Category> {
         //Select * from categories where name = "name" limit 1
-        const category = await this.repository.findOne({name});
+        const category = await this.repository.findOne({});
         return category;
     }
 }

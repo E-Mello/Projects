@@ -5,7 +5,7 @@ import { CreateCategoryUseCase } from './CreateCategoryUseCase';
 class CreateCategoryController {
     constructor(private createCategoryUseCase: CreateCategoryUseCase) {}
 
-    handle(request: Request, response: Response): Response {
+    async handle(request: Request, response: Response): Promise<Response> {
         /**
          * Aqui estou definindo o que vou receber do corpo da requisição
          */
@@ -14,7 +14,7 @@ class CreateCategoryController {
         /**
          *  Aqui estou chamando o método execute do meu useCase, e estou passando os dados que eu quero criar.
          */
-        this.createCategoryUseCase.execute({ name, description });
+        await this.createCategoryUseCase.execute({ name, description });
 
         /**
          * Aqui estou retornando uma resposta para o usuário, e estou dizendo que a resposta foi um sucesso, e que não tem conteúdo,

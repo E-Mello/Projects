@@ -21,12 +21,12 @@ class CreateCategoryUseCase {
     /**
      * Aqui estou criando um método chamado "execute", que vai receber o nome e a descrição da categoria.
      */
-    execute({ name, description }: IRequest): void {
+    async execute({ name, description }: IRequest): Promise<void> {
         /**
          * Aqui estou criando uma variável chamada "categoryAlreadyExists", que vai receber o resultado da busca de uma categoria pelo nome.
          */
         const categoryAlreadyExists =
-            this.categoriesRepository.findByName(name);
+            await this.categoriesRepository.findByName(name);
 
             /**
              * Aqui estou verificando se a categoria já existe, e se existir, eu estou lançando um erro.
