@@ -1,6 +1,7 @@
 import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
 import csvParse from 'csv-parse';
 import fs from 'fs';
+import { inject, injectable } from 'tsyringe';
 
 interface IImportCategory {
     name: string;
@@ -9,9 +10,18 @@ interface IImportCategory {
 
 /**
  * ImportCategoryUseCase is a class that implements the use case.
+ * The @injectable() allows me to inject the category repository into the class.
  */
+@injectable()
 class ImportCategoryUseCase {
-    constructor(private categoriesRepository: CategoriesRepository) {}
+    /**
+     * The constructor receives the repository.
+     * The inject receives the name of the repository that I want to inject, which in this case is the "CategoriesRepository".
+     */
+    constructor(
+        @inject('CategoriesRepository')
+        private categoriesRepository: CategoriesRepository
+    ) {}
 
     loadCategories(file: Express.Multer.File): Promise<IImportCategory[]> {
         return new Promise((resolve, reject) => {
@@ -31,7 +41,7 @@ class ImportCategoryUseCase {
                     });
                 })
                 .on('end', () => {
-                    fs.promises.unlink(file.path)
+                    fs.promises.unlink(file.path);
                     resolve(categories);
                 })
                 .on('error', (err) => {

@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { ISpecificationsRepository } from '../../repositories/ISpecificationsRepository';
 
 /**
@@ -10,12 +12,18 @@ interface IRequest {
 
 /**
  * Aqui estou criando uma classe chamada "CreateSpecificationUseCase", que vai receber o repositório de categoria.
+ * O @injectable() vai permitir que eu possa injetar o repositório de categoria dentro da classe.
  */
+@injectable()
 class CreateSpecificationUseCase {
     /**
-     * Aqui estou criando um construtor, que vai receber o repositório de categoria.
+     * O construtor vai receber o repositório de categoria.
+     * O inject vai receber o nome do repositório que eu quero injetar, que no caso é o "SpecificationsRepository".
      */
-    constructor(private specificationsRepository: ISpecificationsRepository) {}
+    constructor(
+        @inject('SpecificationsRepository')
+        private specificationsRepository: ISpecificationsRepository
+    ) {}
     /**
      * Aqui estou criando um método chamado "execute", que vai receber o nome e a descrição da categoria.
      */

@@ -1,6 +1,6 @@
+import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController';
+import { ImportCategoryController } from '../modules/cars/useCases/importCategory/ImportCategoryControlle';
 import { Router } from 'express';
-import createCategoryController from '../modules/cars/useCases/createCategory';
-import { importCategoryController } from '../modules/cars/useCases/importCategory';
 import { listCategoriesController } from '../modules/cars/useCases/listCategories';
 import multer from 'multer';
 
@@ -18,13 +18,20 @@ const upload = multer({
 });
 
 /**
- * Aqui estou dizendo que quando eu receber uma requisição do tipo "post" na rota "/categories", eu quero que ele execute a função que está dentro
+ * Aqui estou criando uma instância do meu controller, para que eu possa utilizar ele em todas as rotas.
  */
-categoriesRoutes.post('/', (request, response) => {
-    console.log("Reload it's working!");
+const createCategoryController = new CreateCategoryController();
+/**
+ * here i am creating an instance importCategoryController, so that i can use it in all routes.
+ */
+const importCategoryController = new ImportCategoryController();
 
-    return createCategoryController().handle(request, response);
-});
+/**
+ * Aqui estou dizendo que quando eu receber uma requisição do tipo "post" na rota "/categories", eu quero que ele execute a função que está dentro
+ * ou seja, que ele crie uma categoria.
+ * O método "createCategoryController.handle" é o método que eu vou utilizar para dizer que eu quero executar a função que está dentro do meu controller.
+ */
+categoriesRoutes.post('/', createCategoryController.handle);
 
 /**
  * Aqui estou dizendo que quando eu receber uma requisição do tipo "get" na rota "/categories", eu quero que ele execute a função que está dentro

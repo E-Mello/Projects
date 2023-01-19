@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 
@@ -11,12 +13,18 @@ interface IRequest {
 
 /**
  * Aqui estou criando uma classe chamada "CreateCategoryUseCase", que vai receber o repositório de categoria.
+ * O @injectable() vai permitir que eu possa injetar o repositório de categoria dentro da classe.
  */
+@injectable()
 class CreateCategoryUseCase {
     /**
-     * Aqui estou criando um construtor, que vai receber o repositório de categoria.
+     * O construtor vai receber o repositório de categoria.
+     * O inject vai receber o nome do repositório que eu quero injetar, que no caso é o "CategoriesRepository".
      */
-    constructor(private categoriesRepository: ICategoriesRepository) {}
+    constructor(
+        @inject('CategoriesRepository')
+        private categoriesRepository: ICategoriesRepository
+    ) {}
 
     /**
      * Aqui estou criando um método chamado "execute", que vai receber o nome e a descrição da categoria.
@@ -28,9 +36,9 @@ class CreateCategoryUseCase {
         const categoryAlreadyExists =
             await this.categoriesRepository.findByName(name);
 
-            /**
-             * Aqui estou verificando se a categoria já existe, e se existir, eu estou lançando um erro.
-             */
+        /**
+         * Aqui estou verificando se a categoria já existe, e se existir, eu estou lançando um erro.
+         */
         if (categoryAlreadyExists) {
             throw new Error('Category already exists!');
         }

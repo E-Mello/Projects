@@ -1,19 +1,19 @@
+import { CreateSpecificationController } from '../modules/cars/useCases/createSpecification/createSpecificationController';
 import { Router } from 'express';
-import { createSpecificationController } from '../modules/cars/useCases/createSpecification';
-
 /**
  * speecificationsRoutes é uma const que recebe o Router() que é uma função que retorna um objeto do tipo Router.
  */
 const specificationsRoutes = Router();
 
 /**
- * O método post() é um método que recebe uma rota e um callback.
+ * Aqui estou criando uma const chamada createSpecificationController, que vai receber uma instância da classe CreateSpecificationController.
  */
-specificationsRoutes.post('/', (request, response) => {
-    /**
-     * Aqui estou chamando o método handle do meu controller, e estou passando os dados que eu quero criar.
-     */
-    return createSpecificationController.handle(request, response);
-});
+const createSpecificationController = new CreateSpecificationController();
+
+/**
+ * Aqui estou criando uma rota que vai receber um post na url "/categories", e vai chamar o método handle do meu createSpecificationController.
+ * O método "createSpecificationController.handle" é o método que eu vou utilizar para dizer que eu quero executar a função que está dentro do meu controller.
+ */
+specificationsRoutes.post('/', createSpecificationController.handle);
 
 export { specificationsRoutes };

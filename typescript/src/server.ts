@@ -6,6 +6,7 @@
  * o comando acima é para pegar o ip do container dbForTypescript
  */
 import './database';
+import './shared/container';
 
 import express from 'express';
 import { router } from './routes';
