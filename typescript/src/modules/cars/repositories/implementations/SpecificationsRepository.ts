@@ -2,6 +2,7 @@ import {
     ICreateSpecificationDTO,
     ISpecificationsRepository,
 } from '../ISpecificationsRepository';
+import { Repository, getRepository } from 'typeorm';
 
 import { Specification } from '../../entities/Specification';
 
@@ -12,37 +13,31 @@ class SpecificationsRepository implements ISpecificationsRepository {
     /**
      * @property specifications - Array of Specification objects
      */
-    private specifications: Specification[];
+    private repository: Repository<Specification[]>;
 
     /**
      * @constructor - Creates an empty array of Specification objects
      */
     constructor() {
-        this.specifications = [];
+        this.repository = getRepository(Specification);
     }
     /**
      * create - Creates a new Specification object and adds it to the array
      */
-    create({ name, description }: ICreateSpecificationDTO): void {
-        /**
-         * @constant specification - Creates a new Specification object
-         */
-        const specification = new Specification();
-
-        /**
-         * @method Object.assign - Copies the values of all enumerable own properties from one or more source objects to a target object. It will return the target object.
-         */
-        Object.assign(specification, {
-            name,
+    async create({
+        description,
+        name,
+    }: ICreateSpecificationDTO): Promise<void> {
+        const specification = this.repository.create({
             description,
-            created_at: new Date(),
+            name,
         });
+
+        await this.repository.save(specification);
     }
 
-    findByName(name: string): Specification {
-        const specification = this.specifications.find(
-            (specification) => specification.name === name
-        );
+    async findByName(name: string): Promise<Specification> {
+        const specification = this.repository.findOne({ where: { name } });
         return specification;
     }
 }

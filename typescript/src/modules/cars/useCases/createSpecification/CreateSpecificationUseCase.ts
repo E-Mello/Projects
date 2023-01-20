@@ -27,12 +27,12 @@ class CreateSpecificationUseCase {
     /**
      * Aqui estou criando um método chamado "execute", que vai receber o nome e a descrição da categoria.
      */
-    execute({ description, name }: IRequest): void {
+    async execute({ description, name }: IRequest): Promise<void> {
         /**
          * Aqui estou criando uma variável chamada "specificationAlreadyExists", que vai receber o resultado da busca de uma categoria pelo nome.
          */
         const specificationAlreadyExists =
-            this.specificationsRepository.findByName(name);
+            await this.specificationsRepository.findByName(name);
 
         /**
          * Aqui estou verificando se a categoria já existe, e se existir, eu estou lançando um erro.
@@ -44,7 +44,7 @@ class CreateSpecificationUseCase {
         /**
          * Aqui estou criando uma nova categoria, e passando o nome e a descrição da categoria.
          */
-        this.specificationsRepository.create({ name, description });
+        await this.specificationsRepository.create({ name, description });
     }
 }
 
