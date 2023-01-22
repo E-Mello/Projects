@@ -13,7 +13,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
     /**
      * @property specifications - Array of Specification objects
      */
-    private repository: Repository<Specification[]>;
+    private repository: Repository<Specification>;
 
     /**
      * @constructor - Creates an empty array of Specification objects
