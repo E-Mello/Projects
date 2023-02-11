@@ -1,0 +1,215 @@
+<div
+          className={` box-border flex bg-zinc-800 py-3 transition-all ${
+            isActive ? "w-72" : "w-20"
+          }`}
+          style={{
+            transition: "width 0.4s cubic-bezier(0.50, 0.080, 0.60, 0.50)",
+          }}
+        >
+          <div className={`relative h-20 transition-all`}>
+            <div
+              className={`sticky top-0 right-0 origin-bottom text-gray-400 transition-all`}
+              onClick={changeStateBtn}
+            >
+              {isActive ? (
+                <BsFillArrowLeftSquareFill className={`delay-75`} size={20} />
+              ) : (
+                <BsFillArrowRightSquareFill className={`delay-75`} size={20} />
+              )}
+            </div>
+            <div className={`relative bottom-0 left-0 w-full text-blue-300 `}>
+              <div
+                className={` border-2 border-zinc-500 bg-zinc-600 ${
+                  isActive ? "relative h-[calc(3rem_+_15px)] " : ""
+                }`}
+              >
+                <div className={`relative flex items-center`}>
+                  <Avatar
+                    src="https://github.com/E-Mello.png"
+                    width={50}
+                    height={50}
+                  />
+                  <div className={`ml-24 ${isActive ? "" : "hidden"}`}>
+                    <div
+                      className={`whitespace-nowrap text-base font-normal transition-all`}
+                    >
+                      Édio Melo
+                    </div>
+                    <div className={`whitespace-nowrap text-xs transition-all`}>
+                      Web Developer
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav className={`mt-8 ml-5  flex h-5/6 `}>
+            <ul className={`flex w-60 flex-col transition-all`}>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <Link
+                  href="/dashboard"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <MdDashboard />
+                  </i>
+                  <span
+                    className={`ml-6 whitespace-nowrap transition-all ${
+                      isActive ? "" : "hidden"
+                    }`}
+                  >
+                    Dashboard
+                  </span>
+                </Link>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu whitespace-nowrap rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  Dashboard
+                </span>
+              </li>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <a
+                  href="#"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <MdSchool />
+                  </i>
+                  <span
+                    className={`ml-6 whitespace-nowrap transition-all ${
+                      isActive ? "" : "hidden"
+                    }`}
+                  >
+                    TCCs Feitos
+                  </span>
+                </a>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  TCCs Feitos
+                </span>
+              </li>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <a
+                  href="#"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <BsJournalBookmarkFill />
+                  </i>
+                  <span
+                    className={cn(
+                      isActive ? "" : "hidden",
+                      "m-6 whitespace-nowrap transition-all"
+                    )}
+                  >
+                    Projetos
+                  </span>
+                </a>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  Projetos
+                </span>
+              </li>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <a
+                  href="#"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <VscFiles />
+                  </i>
+                  <span
+                    className={`ml-6 whitespace-nowrap transition-all ${
+                      isActive ? "" : "hidden"
+                    }`}
+                  >
+                    Arquivos
+                  </span>
+                </a>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  Arquivos
+                </span>
+              </li>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <a
+                  href="#"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <BsFillBookmarkHeartFill />
+                  </i>
+                  <span
+                    className={`ml-6 whitespace-nowrap transition-all ${
+                      isActive ? "" : "hidden"
+                    }`}
+                  >
+                    Mídias
+                  </span>
+                </a>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  Mídias
+                </span>
+              </li>
+              <li
+                className={` relative mt-0 flex h-12 w-full list-none items-start leading-10 `}
+              >
+                <a
+                  href="#"
+                  className={`flex h-full items-center justify-center text-center align-baseline transition-all `}
+                >
+                  <i>
+                    <BiUser />
+                  </i>
+                  <span
+                    className={`ml-6 whitespace-nowrap transition-all ${
+                      isActive ? "" : "hidden"
+                    }`}
+                  >
+                    Canais Discord
+                  </span>
+                </a>
+                <span
+                  className={`pointer-events-none absolute left-28 top-0 block h-9 w-28 transform-cpu rounded-md bg-gray-500 text-center leading-9 opacity-0 shadow duration-75`}
+                >
+                  Canais Discord
+                </span>
+              </li>
+            </ul>
+          </nav>
+          <footer className={`relative bottom-0 h-16 w-full text-blue-300 `}>
+            <div
+              className={` flex h-full justify-end border-2 border-zinc-500 bg-zinc-600`}
+            >
+              <div className={` flex items-center justify-end`}>
+                <i className={`mb-2 flex justify-between`}>
+                  <span
+                    className={`mr-4 flex items-center justify-center whitespace-nowrap text-center transition-all`}
+                  >
+                    {isActive ? "Logout" : ""}
+                  </span>
+                  <BiLogOut
+                    className={`mr-4 flex h-10 w-8 transition-all`}
+                    width={150}
+                    height={150}
+                  />
+                </i>
+              </div>
+            </div>
+          </footer>
+        </div>
