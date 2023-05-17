@@ -1,0 +1,10 @@
+.tempDashboard {
+    display: flex;
+    padding-left: 20rem;
+}
+
+.tempDashboardIMG {
+    width: 67.5rem;
+    position: sticky;
+}
+

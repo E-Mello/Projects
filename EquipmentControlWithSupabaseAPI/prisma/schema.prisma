@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_URL")
+}
+
+model prestador {
+  id                BigInt  @id @unique @default(autoincrement())
+  codigo            String? @db.VarChar
+  email             String  @unique
+  nome              String? @db.VarChar
+  cpf               String? @db.VarChar
+  cnpj              String? @db.VarChar
+  tel_first         String? @db.VarChar
+  tel_sec           String? @db.VarChar
+  vinc_id_equipment BigInt?
+  active            Boolean @default(true)
+}
+
+model log_prestador {
+  id_log_pres           BigInt  @id @unique @default(autoincrement())
+  log_codigo            String? @db.VarChar
+  log_email             String  @unique
+  log_nome              String? @db.VarChar
+  log_cpf               String? @db.VarChar
+  log_cnpj              String? @db.VarChar
+  log_tel_first         String? @db.VarChar
+  log_tel_sec           String? @db.VarChar
+  log_vinc_id_equipment BigInt?
+  log_active            Boolean @default(true)
+}
+
+model equipamento {
+  id                BigInt  @id @unique @default(autoincrement())
+  modelo            String? @db.VarChar
+  serie             String? @db.VarChar
+  vinc_id_prestador BigInt?
+  user_last_update  String? @db.VarChar
+  active            Boolean @default(true)
+}
+
+model log_equipamento {
+  id_log_equip          BigInt    @id @unique @default(autoincrement())
+  log_modelo            String?   @db.VarChar
+  log_serie             String?   @db.VarChar
+  log_vinc_id_prestador BigInt?
+  log_active            Boolean   @default(true)
+  create_at             DateTime? @default(now()) @db.Timestamptz(6)
+  who_changed           String?   @db.VarChar
+}
+
+model users {
+  id                       String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  username                 String
+  password                 String
+  telefone                 String
+  nome                     String?   @db.VarChar
+  cpf                      String?   @db.VarChar
+  email                    String    @unique
+  setor                    String?   @db.VarChar
+  cargo                    String?   @db.VarChar
+  profilePicture           String
+  create_at                DateTime? @default(now()) @db.Timestamptz(6)
+  auth                     String?   @db.VarChar
+  email_confirmed_at       DateTime? @db.Timestamptz()
+  invited_at               DateTime? @db.Timestamptz()
+  reauthenticated_at       DateTime? @db.Timestamptz()
+  last_login_at            DateTime? @db.Timestamptz()
+  reauthentication_sent_at DateTime? @db.Timestamptz()
+  reauthentication_token   String?   @db.VarChar
+  phone_change_at          DateTime? @db.Timestamptz()
+  confirmation_token       String?   @db.VarChar
+  is_super_admin           Boolean   @default(false)
+}
+
+model log_users {
+  id_log_users       String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  log_username       String?   @db.VarChar
+  log_password       String?   @db.VarChar
+  log_telefone       String?   @db.VarChar
+  log_nome           String?   @db.VarChar
+  log_cpf            String?   @db.VarChar
+  log_email          String    @unique
+  log_setor          String?   @db.VarChar
+  log_cargo          String?   @db.VarChar
+  create_at          DateTime? @default(now()) @db.Timestamptz(6)
+  log_is_super_admin Boolean   @default(false)
+  who_changed        String?   @db.VarChar
+}
